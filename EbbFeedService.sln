@@ -1,0 +1,36 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36202.13
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IC.EbbFeedWorkerService", "src\IC.EbbFeedWorkerService\IC.EbbFeedWorkerService.csproj", "{6929DFEC-29D6-44D1-BCD5-15B913776918}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IC.EbbFeedWorkerService.Tests", "test\IC.EbbFeedWorkerService.Tests\IC.EbbFeedWorkerService.Tests.csproj", "{298F2012-EDA6-44D2-84A2-C4FA562971FB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{8EC462FD-D22E-90A8-E5CE-7E832BA40C5D}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6929DFEC-29D6-44D1-BCD5-15B913776918}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6929DFEC-29D6-44D1-BCD5-15B913776918}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6929DFEC-29D6-44D1-BCD5-15B913776918}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6929DFEC-29D6-44D1-BCD5-15B913776918}.Release|Any CPU.Build.0 = Release|Any CPU
+		{298F2012-EDA6-44D2-84A2-C4FA562971FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{298F2012-EDA6-44D2-84A2-C4FA562971FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{298F2012-EDA6-44D2-84A2-C4FA562971FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{298F2012-EDA6-44D2-84A2-C4FA562971FB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {77935554-56F7-4C0E-BAEB-C521BCA1A6CE}
+	EndGlobalSection
+EndGlobal
