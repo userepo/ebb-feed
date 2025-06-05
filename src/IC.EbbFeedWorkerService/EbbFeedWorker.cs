@@ -110,22 +110,6 @@ public class EbbFeedWorker : BackgroundService
                 List<Notice> tradableNotices = TradingSignalDetector.GetTradableNotices(notices);
                 Console.WriteLine($"{tradableNotices.Count} trading signal(s) detected.");
 
-                // TODO: remove - added for debugging
-                /*
-                foreach (var notice in tradableNotices)
-                {
-                    Console.WriteLine($"NoticeType: {notice.NoticeType}");
-                    Console.WriteLine($"Title: {notice.Title}");
-                    Console.WriteLine($"Summary: {notice.Summary}");
-                    Console.WriteLine($"Posted DateTime: {notice.PostedDateTime}");
-                    Console.WriteLine($"Effective DateTime: {notice.EffectiveDateTime}");
-                    Console.WriteLine($"End DateTime: {notice.EndDateTime}");
-                    Console.WriteLine($"FullNoticeUrl: {notice.NoticeUrl}");
-
-                    Console.WriteLine("--------------");
-                }
-                */
-
                 //Send Slack notifications for notices with trading signals
                 var tasks = tradableNotices.Select(async notice =>
                 {
