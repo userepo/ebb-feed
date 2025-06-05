@@ -4,31 +4,26 @@
 # For more information, please see https://aka.ms/containercompat
 
 # This stage is used when running from VS in fast mode (Default for Debug configuration)
-FROM mcr.microsoft.com/dotnet/runtime:9.0-nanoserver-1809 AS base
+FROM mcr.microsoft.com/dotnet/runtime:9.0-alpine AS base
 WORKDIR /app
 
-
 # This stage is used to build the service project
-FROM mcr.microsoft.com/dotnet/sdk:9.0-windowsservercore-ltsc2019 AS build
-# Install Visual Studio Build Tools, they are required for aot publish
-# Note: Use of the Visual Studio Build Tools requires a valid Visual Studio license.
-RUN curl -SL --output vs_buildtools.exe https://aka.ms/vs/17/release/vs_buildtools.exe
-RUN vs_buildtools.exe --installPath C:\BuildTools --add Microsoft.VisualStudio.Component.VC.Tools.x86.x64 Microsoft.VisualStudio.Component.Windows10SDK.19041 --quiet --wait --norestart --nocache
+FROM mcr.microsoft.com/dotnet/sdk:9.0-alpine AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 COPY ["IC.EbbFeedWorkerService/IC.EbbFeedWorkerService.csproj", "IC.EbbFeedWorkerService/"]
 RUN dotnet restore "./IC.EbbFeedWorkerService/IC.EbbFeedWorkerService.csproj"
 COPY . .
 WORKDIR "/src/IC.EbbFeedWorkerService"
-RUN dotnet build "./IC.EbbFeedWorkerService.csproj" -c %BUILD_CONFIGURATION% -o /app/build
+RUN dotnet build "./IC.EbbFeedWorkerService.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
 # This stage is used to publish the service project to be copied to the final stage
 FROM build AS publish
 ARG BUILD_CONFIGURATION=Release
-RUN dotnet publish "./IC.EbbFeedWorkerService.csproj" -c %BUILD_CONFIGURATION% -o /app/publish /p:UseAppHost=true
+RUN dotnet publish "./IC.EbbFeedWorkerService.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=true
 
 # This stage is used in production or when running from VS in regular mode (Default when not using the Debug configuration)
-FROM mcr.microsoft.com/dotnet/runtime:9.0-nanoserver-1809 AS final
+FROM mcr.microsoft.com/dotnet/runtime:9.0-alpine AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["IC.EbbFeedWorkerService.exe"]
+ENTRYPOINT ["dotnet", "IC.EbbFeedWorkerService.dll"]
